@@ -34,6 +34,8 @@ class App {
                 case "수정" :
                     quotationController.correct(quotationController.getIndexIdById(rq.getId()));
                     break;
+                default:
+                    System.out.println("잘못된 명령입니다.");
             }
         }
     }
