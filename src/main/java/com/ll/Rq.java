@@ -4,11 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Rq {
-    String cmd;
     private String action;
     private Map<String, Integer> requests = new HashMap<>();
     Rq(String cmd) {
-        this.cmd = cmd;
+        System.out.printf("입력된 명령어 : %s\n", cmd);
         String[] cmdQuery = cmd.split("\\?", 2);
         action = cmdQuery[0];
         if (cmdQuery.length == 1) {

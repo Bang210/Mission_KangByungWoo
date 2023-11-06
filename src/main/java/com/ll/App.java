@@ -29,7 +29,11 @@ class App {
                     quotationController.listup();
                     break;
                 case "삭제" :
-                    quotationController.delete(quotationController.getIndexId(rq.getId()));
+                    quotationController.delete(quotationController.getIndexIdById(rq.getId()));
+                    break;
+                case "수정" :
+                    quotationController.correct(quotationController.getIndexIdById(rq.getId()));
+                    break;
             }
         }
     }
