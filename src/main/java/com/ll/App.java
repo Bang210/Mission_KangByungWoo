@@ -24,6 +24,10 @@ class App {
                     return;
                 case "등록" :
                     quotationController.register();
+                    break;
+                case "목록" :
+                    quotationController.listup();
+                    break;
             }
         }
     }
