@@ -28,6 +28,8 @@ class App {
                 case "목록" :
                     quotationController.listup();
                     break;
+                case "삭제" :
+                    quotationController.delete(quotationController.getIndexId(rq.getId()));
             }
         }
     }

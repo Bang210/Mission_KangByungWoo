@@ -23,4 +23,26 @@ class QuotationController {
             }
         }
     }
+    void delete(int[] indexId) {
+        if (indexId[1] == -1) {
+            System.out.println("정확한 id를 입력해주세요.");
+            return;
+        }
+        if (indexId[0] == -1) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", indexId[1]);
+        } else {
+            quotes.remove(indexId[0]);
+            System.out.printf("%d번 명언이 삭제되었습니다.\n", indexId[1]);
+        }
+    }
+    int[] getIndexId(int id) {
+        int[] indexId = {-1, id};
+        for (int i = 0; i < quotes.size(); i++) {
+            if (quotes.get(i).getId() == id) {
+                indexId[0] = i;
+                break;
+            }
+        }
+        return indexId;
+    }
 }
