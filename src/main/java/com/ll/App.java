@@ -11,16 +11,20 @@ class App {
     QuotationController quotationController = new QuotationController();
     //Quototation객체를 담을 리스트 생성
     public static List<Quotation> quotes = new ArrayList<>();
+    //idCount 초기화
     public static int idCount = 1;
     public void run() {
         //초기 메세지
         System.out.println("==명언 앱==");
+        quotationController.load();
         while (true) {
             System.out.print("명령) ");
+            //명령 입력
             String cmd = scanner.nextLine();
             Rq rq = new Rq(cmd);
             switch (rq.getAction()) {
                 case "종료" :
+                    quotationController.save();
                     return;
                 case "등록" :
                     quotationController.register();
