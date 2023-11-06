@@ -1,9 +1,13 @@
 package com.ll;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.Reader;
+import java.util.List;
 
 import static com.ll.App.*;
 
@@ -74,36 +78,23 @@ class QuotationController {
         return indexId;
     }
     void save() {
-        //data.txt 파일을 통한 데이터 저장
-        File file = new File("data.txt");
-        try (FileOutputStream fos = new FileOutputStream(file)) {
-            for (Quotation quote : quotes) {
-                byte[] bytes = (String.valueOf(quote.getId()) + ',' + quote.getContent() + ',' + quote.getAuthor() + '/').getBytes();
-                fos.write(bytes);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //data.json을 통한 데이터 저장
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String json = gson.toJson(quotes);
+        try (FileWriter fileWriter = new FileWriter("data.json")) {
+            fileWriter.write(json);
+            System.out.println("data.json 파일의 내용이 갱신되었습니다.");
+        } catch (Exception e) {
+            System.out.println("갱신실패");
         }
     }
     void load() {
-        //data.txt 파일에서 데이터 불러오기
-        File file = new File("data.txt");
-        try (FileInputStream fis = new FileInputStream(file)) {
-            byte[] data = new byte[(int) file.length()];
-            if (data.length == 0) {
-                //데이터가 없을 경우 실행하지 않음.
-                return;
-            }
-            fis.read(data);
-            String dataString = new String(data);
-            String[] dataArray = dataString.split("/");
-            for (String datas : dataArray) {
-                String[] quoteData = datas.split(",");
-                quotes.add(new Quotation(Integer.parseInt(quoteData[0]), quoteData[1], quoteData[2]));
-                idCount = Integer.parseInt(quoteData[0]) + 1;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        //data.json을 통한 데이터 불러오기
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (Reader reader = new FileReader("data.json")) {
+            quotes = gson.fromJson(reader, new TypeToken<List<Quotation>>(){}.getType());
+            idCount = quotes.get(quotes.size() - 1).getId() + 1;
+        } catch (Exception e) {
         }
     }
 }

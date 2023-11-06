@@ -24,7 +24,6 @@ class App {
             Rq rq = new Rq(cmd);
             switch (rq.getAction()) {
                 case "종료" :
-                    quotationController.save();
                     return;
                 case "등록" :
                     quotationController.register();
@@ -37,6 +36,9 @@ class App {
                     break;
                 case "수정" :
                     quotationController.correct(quotationController.getIndexIdById(rq.getId()));
+                    break;
+                case "빌드" :
+                    quotationController.save();
                     break;
                 default:
                     System.out.println("잘못된 명령입니다.");
