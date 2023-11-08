@@ -21,6 +21,7 @@ class QuotationController {
         System.out.printf("%d번 명언이 등록되었습니다.\n", idCount);
         idCount++;
     }
+
     void listup() {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("-------------------------------");
@@ -32,6 +33,7 @@ class QuotationController {
             }
         }
     }
+
     void delete(int[] indexId) {
         if (indexId[1] == -1) {
             //id값의 이상
@@ -46,6 +48,7 @@ class QuotationController {
             System.out.printf("%d번 명언이 삭제되었습니다.\n", indexId[1]);
         }
     }
+
     void correct(int[] indexId) {
         if (indexId[1] == -1) {
             //id값의 이상
@@ -67,6 +70,7 @@ class QuotationController {
             System.out.printf("%d번 명언이 수정되었습니다.\n", indexId[1]);
         }
     }
+
     int[] getIndexIdById(int id) {
         int[] indexId = {-1, id};
         for (int i = 0; i < quotes.size(); i++) {
@@ -77,6 +81,7 @@ class QuotationController {
         }
         return indexId;
     }
+
     void save() {
         //data.json을 통한 데이터 저장
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -88,11 +93,13 @@ class QuotationController {
             System.out.println("갱신실패");
         }
     }
+
     void load() {
         //data.json을 통한 데이터 불러오기
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Reader reader = new FileReader("data.json")) {
-            quotes = gson.fromJson(reader, new TypeToken<List<Quotation>>(){}.getType());
+            quotes = gson.fromJson(reader, new TypeToken<List<Quotation>>() {
+            }.getType());
             idCount = quotes.get(quotes.size() - 1).getId() + 1;
         } catch (Exception e) {
         }
