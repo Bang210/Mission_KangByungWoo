@@ -51,12 +51,12 @@ class QuotationController {
 
     void correct(int[] indexId) {
         if (indexId[1] == -1) {
-            //id값의 이상
+            //id값에 이상이 있을 때
             System.out.println("정확한 id를 입력해주세요.");
             return;
         }
         if (indexId[0] == -1) {
-            //index값의 이상
+            //index값에 이상이 있을 때
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", indexId[1]);
         } else {
             System.out.printf("명언(기존): %s\n", quotes.get(indexId[0]).getContent());
@@ -72,6 +72,7 @@ class QuotationController {
     }
 
     int[] getIndexIdById(int id) {
+        //0번 인덱스에 index값을, 1번 인덱스에 id값을 가진 배열을 반환
         int[] indexId = {-1, id};
         for (int i = 0; i < quotes.size(); i++) {
             if (quotes.get(i).getId() == id) {
