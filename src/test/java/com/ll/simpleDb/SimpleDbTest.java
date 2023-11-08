@@ -219,5 +219,4 @@ public class SimpleDbTest {
         assertThat(article.isBlind()).isFalse();
     }
 
-
 }

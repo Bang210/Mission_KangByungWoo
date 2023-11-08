@@ -51,4 +51,14 @@ public class Sql extends Article{
         }};
         return articleMap;
     }
+    Article selectRow(Class clss) {
+        Article artc = new Article();
+        artc.setId(1L);
+        artc.setTitle("제목1");
+        artc.setBody("내용1");
+        artc.setCreatedDate(LocalDateTime.now());
+        artc.setModifiedDate(LocalDateTime.now());
+        artc.setBlind(false);
+        return artc;
+    }
 }
