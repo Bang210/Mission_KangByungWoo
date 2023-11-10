@@ -15,7 +15,8 @@ class App {
     public static int idCount = 1;
     public void run() {
         //초기 메세지
-        System.out.println("==명언 앱==");
+        System.out.println("=============================명언 앱=============================\n");
+        quotationController.cmdList();
         quotationController.load();
         while (true) {
             System.out.print("명령) ");
@@ -23,25 +24,15 @@ class App {
             String cmd = scanner.nextLine();
             Rq rq = new Rq(cmd);
             switch (rq.getAction()) {
-                case "종료" :
-                    return;
-                case "등록" :
-                    quotationController.register();
-                    break;
-                case "목록" :
-                    quotationController.listup();
-                    break;
-                case "삭제" :
-                    quotationController.delete(quotationController.getIndexIdById(rq.getId()));
-                    break;
-                case "수정" :
-                    quotationController.correct(quotationController.getIndexIdById(rq.getId()));
-                    break;
-                case "빌드" :
-                    quotationController.save();
-                    break;
-                default:
-                    System.out.println("잘못된 명령입니다.");
+                case "종료" -> {return;}
+                case "등록" -> quotationController.register();
+                case "목록" -> quotationController.listup();
+                case "삭제" -> quotationController.delete(quotationController.getIndexIdById(rq.getId()));
+                case "수정" -> quotationController.correct(quotationController.getIndexIdById(rq.getId()));
+                case "빌드" -> quotationController.save();
+                case "정렬" -> quotationController.sortId();
+                case "명령어" -> quotationController.cmdList();
+                default -> System.out.println("잘못된 명령입니다.");
             }
         }
     }
