@@ -24,12 +24,13 @@ class QuotationController {
 
     void listup() {
         System.out.println("번호 / 작가 / 명언");
-        System.out.println("-------------------------------");
+        System.out.println("-----------------------------------------------------------------");
         if (quotes.isEmpty()) {
             System.out.println("등록된 명언이 없습니다.");
         } else {
             for (Quotation quote : quotes) {
                 System.out.printf("%d / %s / %s\n", quote.getId(), quote.getAuthor(), quote.getContent());
+                System.out.println("-----------------------------------------------------------------");
             }
         }
     }
@@ -134,5 +135,17 @@ class QuotationController {
                 종료:                 앱을 종료합니다.
                 -----------------------------------------------------------------
                 """);
+    }
+    public void search(String keyword) {
+        if (keyword != null) {
+            System.out.printf("키워드: %s\n번호 / 작가 / 명언\n-----------------------------------------------------------------\n", keyword);
+            for (Quotation quote : quotes) {
+                if (quote.getContent().contains(keyword)) {
+                    System.out.printf("%d / %s / %s\n", quote.getId(), quote.getAuthor(), quote.getContent());
+                }
+            }
+        } else {
+            System.out.println("올바른 키워드를 입력해주세요.");
+        }
     }
 }

@@ -32,6 +32,7 @@ class App {
                 case "빌드" -> quotationController.save();
                 case "정렬" -> quotationController.sortId();
                 case "명령어" -> quotationController.cmdList();
+                case "검색" -> quotationController.search(rq.getKeyword());
                 default -> System.out.println("잘못된 명령입니다.");
             }
         }
